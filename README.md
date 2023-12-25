@@ -213,6 +213,27 @@ webpackChunkdiscord_app.push([[Math.random()],{},(req)=>{for(const m of Object.k
 </details>
 <br>
 
+### 구버전 UI 사용하기
+
+이 스크립트는 모바일에서 구버전 UI를 사용하는 확장입니다.
+
+<details>
+<summary>확장</summary>
+
+```js
+let wpRequire;
+window.webpackChunkdiscord_app.push([[ Math.random() ], {}, (req) => { wpRequire = req; }]);
+
+let UserSettingsActions = Object.values(wpRequire.c).find(x => x?.exports?.PreloadedUserSettingsActionCreators).exports;
+let ProtobufTypes = Object.values(wpRequire.c).find(x => x?.exports?.BoolValue).exports;
+
+UserSettingsActions.PreloadedUserSettingsActionCreators.updateAsync("appearance", data => {
+    data.mobileRedesignDisabled = ProtobufTypes.BoolValue.create({value: true})
+}, UserSettingsActions.UserSettingsDelay.INFREQUENT_USER_ACTION)
+```
+</details>
+<br>
+
 
 ### 봇 및 시스템 태그
 
